@@ -1,13 +1,13 @@
 #!/bin/bash
 ## Script simples em ShellScript para obter os dados de um dominio ##
 	
-if [ $1 == "--help"  ]
+if [ $1 == "--help"  ] || [ $1 == "-h" ]
 then 
 
 echo "sdns - Search DNS
  Programa para consultar Dominios na internet
 
- -f   Caso queira expecificar algum arquivo que tenha uma lista de dominios
+ -f   Caso queira expecificar algum arquivo que tenha uma lista de dominios, Ex: sdns -f dominios.txt
  "
 
 elif [ $1 == "-f" ]

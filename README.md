@@ -7,3 +7,9 @@ Forneça  a permissão de execução do arquivo sdns.sh e execute-o com o parame
 
 # Dependencias:
 - whois 
+  
+   - DEB
+   * sudo apt install whois
+   
+   - RHEL
+   * sudo yum install whois

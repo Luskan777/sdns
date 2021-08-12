@@ -3,3 +3,7 @@ Programa para consulta rápida de DNS, consulta dados como MX, IP address, statu
 
 
 Forneça  a permissão de execução do arquivo sdns.sh e execute-o com o parametro "--help" para obter mais informações do programa
+
+
+# Dependencias:
+- whois 

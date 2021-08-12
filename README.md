@@ -1,4 +1,4 @@
-# SDNS
+# SDNS - Search DNS
 Programa para consulta rápida de DNS, consulta dados como MX, IP address, status do dominio e dados referente ao registro do dominio como nameserver, id técnico e etc...
 
 

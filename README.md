@@ -11,3 +11,13 @@ Forneça  a permissão de execução do arquivo sdns.sh e execute-o com o parame
    - DEB  - $ sudo apt install whois
    
    - RHEL - $ sudo yum install whois
+
+# Intalação:
+
+$ git clone  https://github.com/Luskan777/sdns.git
+
+$ cd sdns
+
+$ chmod +x sdns.sh
+
+$ cp sdns.sh /usr/bin/sdns

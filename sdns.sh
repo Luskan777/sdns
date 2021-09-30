@@ -38,8 +38,17 @@ whois $1 | grep Registrar: | head -n1 | sed 's/Registrar/Registro/'
 
 whois $1 | egrep "tech-c|nserver" | sed 's/tech-c/ID-Tecnico/' | sed 's/nserver/nameserver/'
 
-whois $1 | grep status:
+	if [ $(whois $1 | grep status: | awk '{ print $2}') == "published"  ]
+		then
+        		whois $1 | grep status: | sed 's/published/Publicado/'
+	else
+       	 whois $1 | grep status: | sed 's/on-hold/Congelado/'
+
+	fi
 
 whois $1 | grep 'Name Server' | head -n 3
 
 fi
+
+
+

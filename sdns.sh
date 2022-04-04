@@ -13,19 +13,36 @@ echo "sdns - Search DNS
 elif [ $1 == "-f" ]
  then
 
-    echo "Atenção, este comando adicionará um um diretório $PWD/dominios.d "
+    echo "Arquivo sdns-output.txt criado com os resultados "
 
-    mkdir -p $PWD/dominios.d 2> /dev/null
+    #mkdir -p $PWD/dominios.d 2> /dev/null
 
     for i in $(cat $2)  ; 
-    do nslookup $i | egrep "Name|Address"  | awk   '{print $1 " => " $2 }'| tail -n 2 > $PWD/dominios.d/$i ; 
-    dig $i mx +short | awk '{print  "MX => " $2 }' >> $PWD/dominios.d/$i ;
-    whois $1 | grep Registrar: | head -n1 | sed 's/Registrar/Registro/' >> $PWD/dominios.d/$i ;
-    whois $i | egrep "tech-c|nserver" | sed 's/tech-c/ID-Tecnico/' >> $PWD/dominios.d/$i ; 
-    whois $1 | grep 'Name Server' | head -n 3 >> $PWD/dominios.d/$i ;
-    whois $i | grep status >> $PWD/dominios.d/$i ;	 done
+    do 
+    
+    dig $i +short | awk '{print "Address => " $1}' >> $PWD/sdns-output.txt
 
-    echo "As consultas dos dominios estão em '$PWD'/dominios.d "
+    dig $i mx +short | awk '{print "MX => " $2 }' >> $PWD/sdns-output.txt
+
+    whois $i | grep Registrar: | head -n1 | sed 's/Registrar/Registro/' >> $PWD/sdns-output.txt
+
+    whois $i | egrep "tech-c|nserver" | sed 's/tech-c/ID-Tecnico/' | sed 's/nserver/nameserver/' >> $PWD/sdns-output.txt
+
+	if [ $(whois $i | grep status: | awk '{ print $2}') == "published" 2> /dev/null ]
+		then
+        		whois $i | grep status: | sed 's/published/Publicado/' 1>> $PWD/sdns-output.txt 2> /dev/null 
+        else
+            whois $i | grep status: | sed 's/on-hold/Congelado/' 1>> $PWD/sdns-output.txt  2> /dev/null
+
+	fi
+
+    whois $i | grep 'Name Server' | head -n 3 >> $PWD/sdns-output.txt
+	 
+    
+    done
+
+    cat $PWD/sdns-output.txt
+
 
 
 else
@@ -42,13 +59,14 @@ whois $1 | egrep "tech-c|nserver" | sed 's/tech-c/ID-Tecnico/' | sed 's/nserver/
 		then
         		whois $1 | grep status: | sed 's/published/Publicado/' 2> /dev/null
 	else
-       	 whois $1 | grep status: | sed 's/on-hold/Congelado/' 
+       	 whois $1 | grep status: | sed 's/on-hold/Congelado/' 2> /dev/null
 
 	fi
 
 whois $1 | grep 'Name Server' | head -n 3
 
 fi
+
 
 
 

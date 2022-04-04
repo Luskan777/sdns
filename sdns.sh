@@ -15,8 +15,6 @@ elif [ $1 == "-f" ]
 
     echo "Arquivo sdns-output.txt criado com os resultados "
 
-    #mkdir -p $PWD/dominios.d 2> /dev/null
-
     for i in $(cat $2)  ; 
     do 
     

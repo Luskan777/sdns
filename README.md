@@ -12,7 +12,7 @@ Forneça  a permissão de execução do arquivo sdns.sh e execute-o com o parame
    
    - RHEL - $ sudo yum install whois
 
-# Intalação:
+# Instalação:
 
 $ git clone  https://github.com/Luskan777/sdns.git
 
